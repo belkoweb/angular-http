@@ -1,0 +1,26 @@
+<h2>Select a Van:</h2>
+
+<h3>Click on any Van to be rented:</h3>
+
+<ul class="cars">
+    <li *ngFor="let van of vans" (click)="onSelect(van)">
+        {{van.plateNumber}}: {{van.model}}: {{van.price}} euros/day
+        <div *ngIf="van.rented == false">
+            TO BE RENTED
+        </div>
+        <div *ngIf="van.rented == true">
+            RENTED
+        </div>
+    </li>
+</ul>
+
+<div *ngIf="selectedVan">
+    <h2>Selected Van: {{selectedVan.model | uppercase}}
+    </h2>
+    <button (click)="rent(selectedVan)">Rent it now !</button>
+</div>
+
+<div *ngIf="rentedVan">
+    <h2>Rented Van:</h2>
+    {{rentedVan.plateNumber}}: {{rentedVan.model}}
+</div>
