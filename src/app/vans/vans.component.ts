@@ -12,6 +12,7 @@ export class VansComponent implements OnInit {
 vans: Van[];
   selectedVan: Van;
   rentedVan: Van;
+  van: Van = new Van();
 
   constructor(private carService: VanService) { }
 
@@ -30,5 +31,15 @@ vans: Van[];
 
   rent(car: Van): void {
     this.carService.rent(car).subscribe(c => this.rentedVan = c);
+  }
+
+  onSave(): void{
+    this.van.rented = false;
+    this.vans.push(this.van);
+    this.carService.save(this.van).subscribe(data => {
+      console.log('Super ');
+    }, err => {
+      console.log(err);
+    });
   }
 }

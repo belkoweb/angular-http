@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Van } from './van';
 @Injectable({
@@ -19,4 +19,13 @@ export class VanService {
     console.warn("Request to: " + "http://localhost:8080/vans/"+van.plateNumber+"?louer=true");
     return this.http.put("http://localhost:8080/vans/"+van.plateNumber+"?louer=true", null);
   }
+
+
+    public save(van): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type':  'application/json'
+            })};
+        return this.http.post("http://localhost:8080/vans/activemq-save", van, httpOptions);
+    }
 }

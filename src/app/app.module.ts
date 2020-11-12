@@ -5,18 +5,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CarsComponent } from './cars/cars.component';
 import { VansComponent } from './vans/vans.component';
-import { VehiculeCreateComponent } from './vehicule-create/vehicule-create.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarsComponent,
-    VansComponent,
-    VehiculeCreateComponent
+    VansComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { Car } from './car';
@@ -22,10 +22,21 @@ export class CarService {
     return this.http.get<Car[]>("http://localhost:8080/cars/");
   }
 
+
   public rent(car): Observable<any> {
     car.rented = true;
     console.warn("Request to: " + "http://localhost:8080/cars/"+car.plateNumber+"?louer=true");
     return this.http.put("http://localhost:8080/cars/"+car.plateNumber+"?louer=true", null);
+  }
+
+
+
+  public save(car): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })};
+    return this.http.post("http://localhost:8080/cars/activemq-save", car, httpOptions);
   }
 
 }

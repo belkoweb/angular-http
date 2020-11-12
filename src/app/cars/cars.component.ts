@@ -13,7 +13,7 @@ export class CarsComponent implements OnInit {
   cars: Car[];
   selectedCar: Car;
   rentedCar: Car;
-
+  car: Car = new Car();
   constructor(private carService: CarService) { }
 
   ngOnInit(): void {
@@ -33,4 +33,13 @@ export class CarsComponent implements OnInit {
     this.carService.rent(car).subscribe(c => this.rentedCar = c);
   }
 
+    onSave(): void {
+    this.car.rented = false;
+    this.cars.push(this.car);
+    this.carService.save(this.car).subscribe(data => {
+        console.log('cool ');
+      }, err => {
+        console.log(err);
+      });
+         }
 }
